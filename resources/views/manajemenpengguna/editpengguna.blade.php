@@ -8,29 +8,31 @@
             <p class="text-start" id="judulhalaman">Form Edit Data</p>
         </div>
         <div class="col-sm-10" style="background-color: white; width: 1070px; height: 380px">
-            <form action="" class="p-5">
+            <form action="/editpengguna/{{$user->id}}" class="p-5" method="POST">
+              @csrf
+              @method('PATCH')
                 <div class="row mt-3">
                     <label for="" class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-10" id="input">
-                      <input type="text" class="form-control border border-dark" style="width: 568px" name="username">
+                      <input value="{{$user->username}}" type="text" class="form-control border border-dark" style="width: 568px" name="username">
                     </div>
                   </div>
                   <div class="row mt-3">
                     <label for="" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control border border-dark" style="width: 568px" name="nama">
+                      <input value="{{$user->nama}}" type="text" class="form-control border border-dark" style="width: 568px" name="nama">
                     </div>
                   </div>
                   <div class="row mt-3">
                     <label for="" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control border border-dark" style="width: 568px" name="password">
+                      <input value="{{$user->password}}" type="password" class="form-control border border-dark" style="width: 568px" name="password">
                     </div>
                   </div>
                   <div class="row mt-3">
                     <label for="" class="col-sm-2 col-form-label">Unit Kerja</label>
                     <div class="col-sm-10">
-                    <select name="" id="" class="form-control border border-dark" style="width: 568px">
+                    <select name="unit_kerja" id="" class="form-control border border-dark" style="width: 568px">
                         <option value="Resepsionis">Resepsionis</option>
                         <option value="Staf Administrasi Umum">Staf Administrasi Umum</option>
                         <option value="Kepala Tata Usaha">Kepala Tata Usaha</option>

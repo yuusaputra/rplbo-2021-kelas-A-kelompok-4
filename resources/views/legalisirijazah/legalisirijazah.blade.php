@@ -32,28 +32,36 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($ijazahs as $ijazah)
                     <tr>
-                        <td scope="col">Hafis Maulana</td>
-                        <td scope="col">15 Mei 2001</td>
-                        <td scope="col">4122</td>
-                        <td scope="col">2012</td>
-                        <td scope="col">20-11-2021</td>
-                        <td scope="col">
-                          <a href="{{route('editlegalisirijazah')}}">
+                      <td scope="col">{{$ijazah->nama_lengkap}}</td>
+                      <td scope="col">{{$ijazah->ttl}}</td>
+                      <td scope="col">{{$ijazah->nis}}</td>
+                      <td scope="col">{{$ijazah->tahun_alumni}}</td>
+                      <td scope="col">{{$ijazah->tanggal_kunjungan}}</td>
+                      <td scope="col">
+                        <div class="row">
+                          <a href="/editlegalisirijazah/{{$ijazah->id}}">
                             <img src="{{asset('image/edit.png')}}" alt="">
                           </a>
-                          <a href="{{route('detaillegalisirijazah')}}">
+                          <a href="/lihatlegalisirijazah/{{$ijazah->id}}">
                             <img src="{{asset('image/lihat.png')}}" alt="">
                           </a>
-                          <a href="#">
-                            <img src="{{asset('image/hapus.png')}}" alt="">
-                          </a>
-                          <a href="{{route('serahkanlegalisirijazah')}}">
+                          <form action="/deletelegalisirijazah/{{$ijazah->id}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button style="border: none; outline:none; background-color: white">
+                                <img src="{{asset('image/hapus.png')}}" alt="">
+                            </button>
+                          </form>
+                          <a href="/serahkanlegalisirijazah/{{$ijazah->id}}">
                             <img src="{{asset('image/serah.png')}}" alt="">
                           </a>
-                        </td>
-                            
+                        </div>
+                        
+                      </td>
                     </tr>
+                    @endforeach
                     </tbody>
                   </table>
             </div>

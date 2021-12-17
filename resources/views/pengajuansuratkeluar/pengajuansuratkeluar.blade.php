@@ -31,27 +31,37 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td scope="col">Jefitra Abdu Ar Razzak</td>
-                        <td scope="col">198609262015051001</td>
-                        <td scope="col">Rapat Wali Murid</td>
-                        <td scope="col">File</td>
+                      @foreach ($psks as $psk)
+                      <tr>
+                        <td scope="col">{{$psk->nama_pengetik}}</td>
+                        <td scope="col">{{$psk->nip}}</td>
+                        <td scope="col">{{$psk->konsep}}</td>
+                        <td scope="col">{{$psk->file}}</td>
                         <td scope="col">
-                          <a href="{{route('editpengajuansuratkeluar')}}">
-                            <img src="{{asset('image/edit.png')}}" alt="">
-                          </a>
-                          <a href="{{route('detailpengajuansuratkeluar')}}">
-                            <img src="{{asset('image/lihat.png')}}" alt="">
-                          </a>
-                          <a href="#">
-                            <img src="{{asset('image/hapus.png')}}" alt="">
-                          </a>
-                          <a href="serahkanpengajuansuratkeluar">
-                            <img src="{{asset('image/serah.png')}}" alt="">
-                          </a>
+                          <div class="row">
+                            <a href="/editpengajuansuratkeluar/{{$psk->id}}">
+                              <img src="{{asset('image/edit.png')}}" alt="">
+                            </a>
+                            <a href="/lihatpengajuansuratkeluar/{{$psk->id}}">
+                              <img src="{{asset('image/lihat.png')}}" alt="">
+                            </a>
+                            <form action="/deletepengajuansuratkeluar/{{$psk->id}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button style="border: none; outline:none; background-color: white">
+                                  <img src="{{asset('image/hapus.png')}}" alt="">
+                              </button>
+                            </form>
+                            <a href="/serahkanpengajuansuratkeluar/{{$psk->id}}">
+                              <img src="{{asset('image/serah.png')}}" alt="">
+                            </a>
+                          </div>
+                          
                         </td>
                             
                     </tr>
+                      @endforeach
+                    
                     </tbody>
                   </table>
             </div>

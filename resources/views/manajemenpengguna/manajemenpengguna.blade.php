@@ -30,20 +30,29 @@
                       </tr>
                     </thead>
                     <tbody>
+                    @foreach ($users as $user)
                     <tr>
-                        <td scope="col">RPS1</td>
-                        <td scope="col">M. Khoirun Siddik</td>
-                        <td scope="col">Resepsionis</td>
+                      
+                        <td scope="col">{{$user->username}}</td>
+                        <td scope="col">{{$user->nama}}</td>
+                        <td scope="col">{{$user->unit_kerja}}</td>
                         <td scope="col">
-                          <a href="{{route('editpengguna')}}">
-                            <img src="{{asset('image/edit.png')}}" alt="">
-                          </a>
-                          <a href="#">
-                            <img src="{{asset('image/hapus.png')}}" alt="">
-                          </a>
+                          <div class="row">
+                            <a href="/editpengguna/{{$user->id}}">
+                              <img src="{{asset('image/edit.png')}}" alt="">
+                            </a>
+                            <form action="/deletepengguna/{{$user->id}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button style="border: none; background-color: white">
+                                  <img src="{{asset('image/hapus.png')}}" alt="">
+                              </button>
+                          </form>
+                          </div>
                         </td>
-                            
+                      
                     </tr>
+                    @endforeach
                     </tbody>
                   </table>
             </div>

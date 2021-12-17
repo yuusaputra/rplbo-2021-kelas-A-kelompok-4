@@ -32,28 +32,37 @@
                       </tr>
                     </thead>
                     <tbody>
+                    @foreach ($psms as $psm)
                     <tr>
-                        <td scope="col">Ahmad Fauzi</td>
-                        <td scope="col">Bank Syariah Indonesia</td>
-                        <td scope="col">Karyawan</td>
-                        <td scope="col">20-11-2021</td>
-                        <td scope="col">Sosialisasi Kepada Siswa Untuk Menabung di BSI</td>
-                        <td scope="col">
-                          <a href="{{route('editpengajuansuratmasuk')}}">
+                      <td scope="col">{{$psm->nama_pengirim}}</td>
+                      <td scope="col">{{$psm->instansi}}</td>
+                      <td scope="col">{{$psm->jabatan}}</td>
+                      <td scope="col">{{$psm->tanggal_kunjungan}}</td>
+                      <td scope="col">{{$psm->isi_ringkasan_surat}}</td>
+                      <td scope="col">
+                        <div class="row">
+                          <a href="/editpengajuansuratmasuk/{{$psm->id}}">
                             <img src="{{asset('image/edit.png')}}" alt="">
                           </a>
-                          <a href="{{route('detailpengajuansuratmasuk')}}">
+                          <a href="/lihatpengajuansuratmasuk/{{$psm->id}}">
                             <img src="{{asset('image/lihat.png')}}" alt="">
                           </a>
-                          <a href="#">
-                            <img src="{{asset('image/hapus.png')}}" alt="">
-                          </a>
-                          <a href="serahkanpengajuansuratmasuk">
+                          <form action="/deletepengajuansuratmasuk/{{$psm->id}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button style="border: none; outline:none; background-color: white">
+                                <img src="{{asset('image/hapus.png')}}" alt="">
+                            </button>
+                          </form>
+                          <a href="/serahkanpengajuansuratmasuk/{{$psm->id}}">
                             <img src="{{asset('image/serah.png')}}" alt="">
                           </a>
-                        </td>
-                            
-                    </tr>
+                        </div>
+                      </td>
+                          
+                  </tr>
+                    @endforeach
+                    
                     </tbody>
                   </table>
             </div>
