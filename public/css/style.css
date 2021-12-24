@@ -2,6 +2,10 @@ th {
     color: white;
 }
 
+td  {
+
+}
+
 #judulhalaman {
     font-family: 'Inter', sans-serif; 
     color: #008DFF;
@@ -11,3 +15,30 @@ th {
 /* #input{
     margin-top: 20px;
 } */
+
+#form_login {
+    box-shadow: 0 .125rem .25rem rgba(black, .075);
+    padding: 3px;
+}
+
+#teks_depan {
+    font-family: 'Inter', sans-serif; 
+    text-align: center;
+    color: #008DFF;
+    padding: 3%;
+    font-size: 36px;
+}
+
+#button_login {
+    background-color: #008DFF;
+    color: white;
+    width: 250px;
+}
+
+#tabellihat {
+    font-family: 'Inter', sans-serif;
+}
+
+.field {
+    text-align: end;
+}

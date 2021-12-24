@@ -13,10 +13,11 @@
             </div>
             <div class="col-sm-6 d-flex justify-content-end">
               <a href="{{route('tambahpengguna')}}">
-                  <button type="button" class="btn btn-primary" style="width: 207px; height: 41px">
-                      <img src="{{asset('image/tambah.png')}}" class="mr-3" alt="" style="width: 23px; height: 23px"><b>Tambahkan Data</b>
-                  </button>
+                <button type="button" class="btn btn-primary" style="width: 207px; height: 41px">
+                    <img src="{{asset('image/tambah.png')}}" class="mr-3" alt="" style="width: 23px; height: 23px"><b>Tambahkan Data</b>
+                </button>
               </a>
+              
             </div>
         <div class="col-sm-12">
             <div class="container" style="background-color: white">
@@ -37,18 +38,16 @@
                         <td scope="col">{{$user->nama}}</td>
                         <td scope="col">{{$user->unit_kerja}}</td>
                         <td scope="col">
-                          <div class="row">
+                          <div class="row align-items-center">
+                            <a href="/lihatpengguna/{{$user->id}}"><i class="fas fa-eye "></i></a>
                             <a href="/editpengguna/{{$user->id}}">
-                              <img src="{{asset('image/edit.png')}}" alt="">
+                              <i class="fas fa-pencil-alt ml-2"></i>
                             </a>
-                            <form action="/deletepengguna/{{$user->id}}" method="POST">
-                              @csrf
-                              @method('DELETE')
-                              <button style="border: none; background-color: white">
-                                  <img src="{{asset('image/hapus.png')}}" alt="">
-                              </button>
-                          </form>
+                            <a href="" data-toggle="modal" data-target="#ModalDelete{{$user->id}}">
+                              <i class="fas fa-trash-alt ml-2"></i>
+                            </a>
                           </div>
+                          @include('modal.deletepengguna')
                         </td>
                       
                     </tr>

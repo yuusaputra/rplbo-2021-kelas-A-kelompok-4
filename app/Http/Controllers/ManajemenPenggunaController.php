@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ManajemenPenggunaController extends Controller
 {
     public function tampilPengguna() {
+        // $this->authorize('akses', User::class);
         $users = User::all();
         return view('manajemenpengguna.manajemenpengguna', compact('users'));
     }
@@ -36,7 +37,7 @@ class ManajemenPenggunaController extends Controller
             'unit_kerja'
         ]);
         $userdata['password'] = bcrypt($userdata['password']);
-        $user = User::create($userdata);
+        User::create($userdata);
 
         return redirect('/manajemenpengguna');
     }
@@ -62,5 +63,10 @@ class ManajemenPenggunaController extends Controller
     public function deletePengguna($id) {
         User::destroy($id);
         return back();
+    }
+
+    public function tampilDetailPengguna($id) {
+        $user = User::where('id', $id)->first();
+        return view('manajemenpengguna.lihatpengguna', compact('user'));
     }
 }

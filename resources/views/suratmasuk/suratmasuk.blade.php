@@ -7,10 +7,11 @@
       
       <div class="row mb-2">
         <div class="container">
-          <div class="row align-items-center justify-content-around">
+          <div class="row">
             <div class="col-sm-6">
-              <p class="text-start" id="judulhalaman">SURAT MASUK</p>
+              <p class="text-start" id="judulhalaman">DATA SURAT MASUK</p>
             </div>
+            @if (auth()->user()->unit_kerja=="Staf Administrasi Umum")
             <div class="col-sm-6 d-flex justify-content-end">
               <a href="{{route('tambahsuratmasuk')}}">
                   <button type="button" class="btn btn-primary" style="width: 207px; height: 41px">
@@ -18,42 +19,70 @@
                   </button>
               </a>
             </div>
+            @endif
         <div class="col-sm-12">
             <div class="container" style="background-color: white">
                 <table class="table table-bordered">
                     <thead style="background-color: #008DFF;">
-                      <tr>
-                        <th scope="col">Nomor Surat</th>
-                        <th scope="col">Tanggal Surat</th>
-                        <th scope="col">Sifat Surat</th>
-                        <th scope="col">Tanggal Diterima</th>
-                        <th scope="col">Perihal</th>
-                        <th scope="col">Aksi</th>
+                      <tr class="text-center">
+                        <th scope="col" class="align-text-top">Nomor Surat</th>
+                        <th scope="col" class="align-text-top">Tanggal Surat</th>
+                        <th scope="col" class="align-text-top">Sifat Surat</th>
+                        <th scope="col" class="align-text-top">Perihal</th>
+                        <th scope="col" class="align-text-top">Aksi</th>
+                        <th scope="col" class="align-text-top">Catatan</th>
                       </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td scope="col">12.010/DP-KM/IX/2021</td>
-                        <td scope="col">20-11-2021</td>
-                        <td scope="col">Biasa</td>
-                        <td scope="col">20-11-2021</td>
-                        <td scope="col">Sosialisasi Kepada ......</td>
+                      @foreach ($sms as $sm)
+                      <tr>
+                        <td scope="col">{{$sm->nomor_surat}}</td>
+                        <td scope="col">{{$sm->tanggal_surat}}</td>
+                        <td scope="col">{{$sm->sifat_surat}}</td>
+                        <td scope="col">{{$sm->perihal}}</td>
                         <td scope="col">
-                          <a href="{{route('editsuratmasuk')}}">
-                            <img src="{{asset('image/edit.png')}}" alt="">
-                          </a>
-                          <a href="{{route('detailsuratmasuk')}}">
-                            <img src="{{asset('image/lihat.png')}}" alt="">
-                          </a>
-                          <a href="#">
-                            <img src="{{asset('image/hapus.png')}}" alt="">
-                          </a>
-                          <a href="{{route('serahkansuratmasuk')}}">
-                            <img src="{{asset('image/serah.png')}}" alt="">
-                          </a>
+                          @if (auth()->user()->unit_kerja=="Staf Administrasi Umum")
+                          <div class="row">
+                            <a href="/lihatsuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-eye ml-2"></i>
+                            </a>
+                            <a href="/editsuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-pencil-alt ml-2"></i>
+                            </a>
+                            <a href="" data-toggle="modal" data-target="#ModalDelete{{$sm->id}}">
+                              <i class="fas fa-trash-alt ml-2"></i>
+                            </a>
+                            <a href="/serahkansuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-arrow-circle-right ml-2"></i>
+                            </a>
+                          </div>
+                          @endif
+                          @if (auth()->user()->unit_kerja=="Kepala Tata Usaha")
+                          <div class="row">
+                            <a href="/lihatsuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-eye ml-2"></i>
+                            </a>
+                            <a href="/editsuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-pencil-alt ml-2"></i>
+                            </a>
+                            <a href="/serahkansuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-arrow-circle-right ml-2"></i>
+                            </a>
+                          </div>
+                          @endif
+                          @if (auth()->user()->unit_kerja=="Kepala Sekolah")
+                          <div class="row">
+                            <a href="/lihatsuratmasuk/{{$sm->id}}">
+                              <i class="fas fa-eye ml-2"></i>
+                            </a>
+                          </div>
+                          @endif
+                          <td scope="col">{{$sm->catatan}}</td>
                         </td>
-                            
+                        @include('modal.deletesuratmasuk')
                     </tr>
+                      @endforeach
+                    
                     </tbody>
                   </table>
             </div>

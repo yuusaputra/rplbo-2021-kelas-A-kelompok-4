@@ -5,10 +5,10 @@
     <div class="container-fluid mt-4">
       <div class="row mb-2 d-flex justify-content-center">
         <div class="col-sm-10">
-            <p class="text-start" id="judulhalaman">Form Edit Data</p>
+            <p class="text-start" id="judulhalaman">Form Edit Pengajuan Surat Masuk</p>
         </div>
         <div class="col-sm-10" style="background-color: white; width: 1070px; height: 500px">
-          <form action="/editpengajuansuratmasuk/{{$psm->id}}" class="p-5" method="POST">
+          <form action="/editpengajuansuratmasuk/{{$psm->id}}" class="p-5" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="row mt-3">
@@ -44,10 +44,10 @@
               <div class="row mt-3">
                 <label for="" class="col-sm-2 col-form-label">File</label>
                 <div class="col-sm-10">
-                  <input value="{{$psm->file}}" type="text" class="form-control border border-dark" style="width: 568px" name="file">
+                  <input type="file" class="form-control border border-dark" style="width: 568px" name="file">
                   <div class="row mt-4">
                     <button type="submit" class="btn btn-primary mr-3" style="width: 90px">Simpan</button>
-                    <a href="{{route('tampilpengajuansuratmasuk')}}"><button type="button" class="btn btn-danger" style="width: 90px">Kembali</button></a>
+                    <a href="{{route('tampilpengajuansuratmasuk')}}"><button type="button" class="btn btn-secondary" style="width: 90px">Kembali</button></a>
                 </div>
                 </div>
                 
